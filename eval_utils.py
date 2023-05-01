@@ -17,10 +17,38 @@ sys.path.insert(0, pdvc_dir)
 sys.path.insert(0, os.path.join(pdvc_dir, 'densevid_eval3'))
 sys.path.insert(0, os.path.join(pdvc_dir, 'densevid_eval3/SODA'))
 
-
 from densevid_eval3.eval_soda import eval_soda
 from densevid_eval3.eval_para import eval_para
 from densevid_eval3.eval_dvc import eval_dvc
+
+tuner_path = "/home/dologan/DenseVideoCaptioning/model_files/ACTUAL_Linear1_imp.pth"
+
+class PermuteBlock(torch.nn.Module):
+    def forward(self, x):
+        return x.transpose(1,2)
+
+class Linear1_imp(torch.nn.Module):
+    def __init__(self, input_size=3072, output_size=768):
+
+        super(Linear1_imp, self).__init__()
+        self.name = "linear 1"
+        
+        self.linear1 = torch.nn.Linear(input_size, input_size)
+        self.linear2 = torch.nn.Linear(input_size, input_size)
+        self.gelu    = torch.nn.GELU()
+        self.dropout = torch.nn.Dropout(p=0.15)
+        self.bn1     = torch.nn.BatchNorm1d(input_size)
+        self.bn2     = torch.nn.BatchNorm1d(input_size)
+        self.permute = PermuteBlock()
+    def forward(self, x):
+        x = self.linear1(x)
+        x = self.permute(x)
+        x = self.permute(self.bn1(x))
+        x = self.dropout(self.gelu(x))
+        x = self.linear2(x)
+        x = self.permute(x)
+        x = self.permute(self.bn2(x))
+        return x
 
 def calculate_avg_proposal_num(json_path):
     data = json.load(open(json_path))
@@ -163,6 +191,14 @@ def evaluate(model, criterion, postprocessors, loader, dvc_json_path, logger=Non
                 'external_data': {'used:': True, 'details': None}}
     opt = loader.dataset.opt
 
+    tuner = Linear1_imp().to(opt.device)
+    pretrained_tuner = torch.load(tuner_path)
+    pretrained_dict = pretrained_tuner["model_state_dict"]
+    tuner.load_state_dict(pretrained_dict)
+    tuner.eval()
+    print("FINISHED LOADING MODEL")
+
+
     loss_sum = OrderedDict()
     with torch.set_grad_enabled(False):
         for dt in tqdm(loader, disable=opt.disable_tqdm):
@@ -174,6 +210,10 @@ def evaluate(model, criterion, postprocessors, loader, dvc_json_path, logger=Non
             dt['video_target'] = [
                     {key: _.to(device) if isinstance(_, torch.Tensor) else _ for key, _ in vid_info.items()} for vid_info in
                     dt['video_target']]
+
+            with torch.no_grad():
+               dt['video_tensor'] = tuner(dt['video_tensor'])
+
 
             output, loss = model(dt, criterion, opt.transformer_input_type, eval_mode=True)
             orig_target_sizes = dt['video_length'][:, 1]

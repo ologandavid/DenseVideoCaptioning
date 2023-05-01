@@ -1,4 +1,3 @@
-# coding:utf-8
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -28,6 +27,36 @@ from misc.utils import print_alert_message, build_floder, create_logger, backup_
 from data.video_dataset import PropSeqDataset, collate_fn
 from pdvc.pdvc import build
 from collections import OrderedDict
+
+
+tuner_path = "/home/dologan/DenseVideoCaptioning/model_files/ACTUAL_Linear1_imp.pth"
+
+class PermuteBlock(torch.nn.Module):
+    def forward(self, x):
+        return x.transpose(1,2)
+
+class Linear1_imp(torch.nn.Module):
+    def __init__(self, input_size=3072, output_size=768):
+
+        super(Linear1_imp, self).__init__()
+        self.name = "linear 1"
+        
+        self.linear1 = torch.nn.Linear(input_size, input_size)
+        self.linear2 = torch.nn.Linear(input_size, input_size)
+        self.gelu    = torch.nn.GELU()
+        self.dropout = torch.nn.Dropout(p=0.15)
+        self.bn1     = torch.nn.BatchNorm1d(input_size)
+        self.bn2     = torch.nn.BatchNorm1d(input_size)
+        self.permute = PermuteBlock()
+    def forward(self, x):
+        x = self.linear1(x)
+        x = self.permute(x)
+        x = self.permute(self.bn1(x))
+        x = self.dropout(self.gelu(x))
+        x = self.linear2(x)
+        x = self.permute(x)
+        x = self.permute(self.bn2(x))
+        return x
 
 def train(opt):
     set_seed(opt.seed)
@@ -145,6 +174,13 @@ def train(opt):
     logger.info('loss type: {}'.format(weight_dict.keys()))
     logger.info('loss weights: {}'.format(weight_dict.values()))
 
+    tuner = Linear1_imp().to(opt.device)
+    pretrained_tuner = torch.load(tuner_path)
+    pretrained_dict = pretrained_tuner["model_state_dict"]
+    tuner.load_state_dict(pretrained_dict)
+    tuner.eval()
+    print("FINISHED LOADING MODEL")
+
     # Epoch-level iteration
     while True:
         if True:
@@ -177,6 +213,9 @@ def train(opt):
                 dt['video_target']]
 
             dt = collections.defaultdict(lambda: None, dt)
+
+            with torch.no_grad():
+               dt['video_tensor'] = tuner(dt['video_tensor'])
 
             output, loss = model(dt, criterion, opt.transformer_input_type)
 
