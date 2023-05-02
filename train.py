@@ -58,6 +58,59 @@ class Linear1_imp(torch.nn.Module):
         x = self.permute(self.bn2(x))
         return x
 
+
+class model_conv1_imp_bn(torch.nn.Module):
+  def __init__(self, input_size=3072, output_size=768):
+    super(model_conv1_imp_bn,self).__init__()
+    self.name = "model_conv1_imp"
+    self.conv = torch.nn.Sequential(
+        torch.nn.Conv1d(input_size,input_size,kernel_size=5, padding=2, groups = input_size),
+        torch.nn.GELU(), ## Added this
+        torch.nn.BatchNorm1d(num_features=3072), ## Added this
+        torch.nn.Conv1d(input_size,input_size,kernel_size=5, padding=2, groups = input_size)
+        )
+    self.permute = PermuteBlock()
+  def forward(self, x):
+    x = self.permute(x)
+    x = self.conv(x)
+    x = self.permute(x)
+    return x
+
+class model_conv1_linear_imp(torch.nn.Module):
+  def __init__(self, input_size=3072, output_size=768):
+    super(model_conv1_linear_imp,self).__init__()
+    self.name = "model_conv1_update2"
+    self.conv = torch.nn.Sequential(
+        torch.nn.Conv1d(input_size,input_size,kernel_size=5, padding=2, groups = input_size),
+        torch.nn.BatchNorm1d(3072),
+        torch.nn.GELU(),
+        torch.nn.Conv1d(input_size,input_size,kernel_size=5, padding=2, groups = input_size)
+        )
+    self.linear = torch.nn.Linear(input_size, input_size)
+    self.bn = torch.nn.BatchNorm1d(input_size)
+    self.permute = PermuteBlock()
+
+  def forward(self, x):
+    x = self.permute(x)
+    x = self.bn(self.conv(x))
+    x = self.permute(x)
+    out = self.linear(x)
+    return out
+
+class model_conv2_imp(torch.nn.Module):
+  def __init__(self, input_size=3072, output_size=768):
+    super(model_conv2_imp,self).__init__()
+    self.name = "model_conv2_imp"
+    self.conv = torch.nn.Sequential(
+        torch.nn.Conv1d(200,200,kernel_size=5, padding=2, groups=200),
+        torch.nn.BatchNorm1d(200),
+        torch.nn.GELU(),
+        torch.nn.Conv1d(200,200,kernel_size=5, padding=2, groups=200)
+        )
+  def forward(self, x):
+    x = self.conv(x)
+    return x
+
 def train(opt):
     set_seed(opt.seed)
     save_folder = build_floder(opt)
