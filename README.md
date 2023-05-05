@@ -1,15 +1,15 @@
-# PDVC
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/end-to-end-dense-video-captioning-with/dense-video-captioning-on-youcook2)](https://paperswithcode.com/sota/dense-video-captioning-on-youcook2?p=end-to-end-dense-video-captioning-with)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/end-to-end-dense-video-captioning-with/dense-video-captioning-on-activitynet)](https://paperswithcode.com/sota/dense-video-captioning-on-activitynet?p=end-to-end-dense-video-captioning-with)
+# Modified PDVC w/ Semantic Alignment
 
-Official implementation for End-to-End Dense Video Captioning with Parallel Decoding (ICCV 2021) 
+Modified Implenetation for End-to-End Dense Video Captioning with Parallel Decoding and Semantic Alignment
+![pdvc.jpg](pdvc.png)
 
+Original implementation for End-to-End Dense Video Captioning with Parallel Decoding (ICCV 2021) 
 [[paper]](https://arxiv.org/abs/2108.07781)
 
 **This repo supports:**
 * two video captioning tasks: dense video captioning and video paragraph captioning
-* two datasets: YouCook2
-* video features containing C3D, TSN, and TSP.
+* dataset: YouCook2
+* video features containing TSN
 * visualization of the generated captions of your own videos
 
 **Table of Contents:**
