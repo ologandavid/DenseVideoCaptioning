@@ -36,7 +36,7 @@ Official implementation for End-to-End Dense Video Captioning with Parallel Deco
 
 ## Introduction
 PDVC is a simple yet effective framework for end-to-end dense video captioning with parallel decoding (PDVC), by formulating the dense caption generation as a set prediction task. Without bells and whistles, extensive experiments on ActivityNet Captions and YouCook2 show that PDVC is capable of producing high-quality captioning results, surpassing the state-of-the-art methods when its localization accuracy is on par with them.
-![pdvc.jpg](pdvc.jpg)
+![pdvc.jpg](pdvc.png)
 
 ## Installation
 Environment: Linux,  GCC>=5.4, CUDA >= 9.2, Python>=3.7, PyTorch>=1.5.1
