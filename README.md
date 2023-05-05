@@ -145,7 +145,7 @@ python eval.py --eval_folder ${eval_folder} --eval_transformer_input_type gt_pro
 ### Dense video captioning (with learnt proposals)
 
 |  Model | Features | config_path |   Url   |   BLEU4   | METEOR |  CIDEr | SODA_c |
-|  ----  |  ----    |   ----  |  ----  |  ----   |  ----  |   ----  |  ----  |  ----  |  ----  | ---- |
+|  ----  |  ----    |   ----  |  ----  |  ----   |  ----  |   ----  |  ----  |
 | PDVC_baseline   | TSN  | cfgs/yc2_tsn_pdvc.yml | [model]()  |  0.76 ± 0.05   |  4.39 ± 0.07  | 20.68 ± 0.21  |  4.47 ± 0.87  |
 | Linear   | TSN  | cfgs/yc2_tsn_pdvc.yml |  [model]()  |  0.87 ± 0.06   |  4.74 ± 0.09  | 21.76 ± 0.04  |  4.45 ± 1.13  |
 | Conv1   | TSN | cfgs/yc2_tsn_pdvc.yml | [model]()  |  0.90 ± 0.02   |  4.53 ± 0.07  | 22.32 ± 0.05  |  4.50 ± 1.48 |
