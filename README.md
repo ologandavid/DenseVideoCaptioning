@@ -86,26 +86,31 @@ For other language support, find the abbreviation of your language at this [url]
 ### Download Video Features
 
 ```bash
-cd data/anet/features
-bash download_anet_c3d.sh
-# bash download_anet_tsn.sh
-# bash download_i3d_vggish_features.sh
-# bash download_tsp_features.sh
+cd data/yc2/features
+bash download_yc2_tsn_features.sh
+
 ```
 
 ### Dense Video Captioning
-1. PDVC with learnt proposals
 ```
 # Training
-config_path=cfgs/anet_c3d_pdvc.yml
+config_path=cfgs/yc2_tsn_pdvc.yml
 python train.py --cfg_path ${config_path} --gpu_id ${GPU_ID}
 # The script will evaluate the model for every epoch. The results and logs are saved in `./save`.
 
 # Evaluation
-eval_folder=anet_c3d_pdvc # specify the folder to be evaluated
-python eval.py --eval_folder ${eval_folder} --eval_transformer_input_type queries --gpu_id ${GPU_ID}
+eval_folder=yc2_tsn_pdvc_baseline # specify the folder to be evaluated
+eval_caption_file=data/yc2/captiondata/yc2_val.json
+python eval.py --eval_folder ${eval_folder} --eval_caption_file ${eval_caption_file} --eval_transformer_input_type queries
+# This script returns the Soda_c scores
+
+eval_json=save/yc2_tsn_pdvc_baseline/2023-04-18-03-29-07_yc2_tsn_pdvc_v_2023-04-18-00-02-08_epoch19_num457_alpha1.0.json_rerank_alpha1.0_temp2.0.json
+# Replace this with the json file in the save folder generated during training
+
+python densevid_eval3/evaluate2018.py -v -s ${eval_json} -r data/yc2/captiondata/yc2_val.json
+
 ```
-2. PDVC with ground-truth proposals
+<!-- 2. PDVC with ground-truth proposals
 
 ```
 # Training
@@ -115,31 +120,7 @@ python train.py --cfg_path ${config_path} --gpu_id ${GPU_ID}
 # Evaluation
 eval_folder=anet_c3d_pdvc_gt
 python eval.py --eval_folder ${eval_folder} --eval_transformer_input_type gt_proposals --gpu_id ${GPU_ID}
-```
-
-
-### Video Paragraph Captioning
-
-1. PDVC with learnt proposals
-```bash
-# Training
-config_path=cfgs/anet_c3d_pdvc.yml
-python train.py --cfg_path ${config_path} --criteria_for_best_ckpt pc --gpu_id ${GPU_ID} 
-
-# Evaluation
-eval_folder=anet_c3d_pdvc # specify the folder to be evaluated
-python eval.py --eval_folder ${eval_folder} --eval_transformer_input_type queries --gpu_id ${GPU_ID}
-```
-2. PDVC with ground-truth proposals
-```
-# Training
-config_path=cfgs/anet_c3d_pdvc_gt.yml
-python train.py --cfg_path ${config_path} --criteria_for_best_ckpt pc --gpu_id ${GPU_ID}
-
-# Evaluation
-eval_folder=anet_c3d_pdvc_gt
-python eval.py --eval_folder ${eval_folder} --eval_transformer_input_type gt_proposals --gpu_id ${GPU_ID}
-```
+``` -->
 
 ## Performance
 ### Dense video captioning (with learnt proposals)
