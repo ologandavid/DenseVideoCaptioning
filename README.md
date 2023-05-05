@@ -4,7 +4,7 @@
 
 Official implementation for End-to-End Dense Video Captioning with Parallel Decoding (ICCV 2021) 
 
-[[paper]](https://arxiv.org/abs/2108.07781) [[valse论文速递(Chinese)]](https://www.bilibili.com/video/BV1Xq4y1B7p7) 
+[[paper]](https://arxiv.org/abs/2108.07781)
 
 **This repo supports:**
 * two video captioning tasks: dense video captioning and video paragraph captioning
