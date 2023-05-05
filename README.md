@@ -29,7 +29,7 @@ Official implementation for End-to-End Dense Video Captioning with Parallel Deco
 
 
 ## Updates
-- (2023.05.05) **added tuner network into PDVC framework to semantically align input video features. Tuner pth files can be found in ./model_files.
+- (2023.05.05) **added tuner network into PDVC framework to semantically align input video features. Tuner .pth files can be found in ./model_files.**
 - (2021.11.19) add code for running PDVC on raw videos and visualize the generated captions (support Chinese and other non-English languages)**
 - (2021.11.19) add pretrained models with [TSP features](https://github.com/HumamAlwassel/TSP). It achieves 9.03 METEOR(2021) and 6.05 SODA_c, a very competitive results on ActivityNet Captions without self-critical sequence training.
 - (2021.08.29) add TSN pretrained models and support YouCook2
