@@ -15,15 +15,13 @@ Original Implementation for End-to-End Dense Video Captioning with Parallel Deco
 **Table of Contents:**
 * [Updates](#updates)
 * [Introduction](#introduction)
-* [Preparation](#preparation)
+* [Installation](#installation)
 * [Running PDVC on Your Own Videos](#running-pdvc-on-your-own-videos)
 * [Training and Validation](#training-and-validation)
   + [Download Video Features](#download-video-features)
   + [Dense Video Captioning](#dense-video-captioning)
-  + [Video Paragraph Captioning](#video-paragraph-captioning)
 * [Performance](#performance)
   + [Dense video captioning](#dense-video-captioning)
-  + [Video paragraph captioning](#video-paragraph-captioning)
 * [Acknowledgement](#acknowledgement)
 
 
