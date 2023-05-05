@@ -93,6 +93,7 @@ bash download_yc2_tsn_features.sh
 
 ### Dense Video Captioning
 ```
+1. Train and Eval PDVC
 # Training
 config_path=cfgs/yc2_tsn_pdvc.yml
 python train.py --cfg_path ${config_path} --gpu_id ${GPU_ID}
@@ -110,6 +111,8 @@ eval_json=save/yc2_tsn_pdvc_baseline/2023-04-18-03-29-07_yc2_tsn_pdvc_v_2023-04-
 python densevid_eval3/evaluate2018.py -v -s ${eval_json} -r data/yc2/captiondata/yc2_val.json
 
 ```
+2. Tuner Model Training Pipeline
+
 <!-- 2. PDVC with ground-truth proposals
 
 ```
