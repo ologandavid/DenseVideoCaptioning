@@ -98,6 +98,8 @@ bash download_yc2_tsn_features.sh
 ```
 # Training
 
+#Specify Model Path and Type in Lines 32, 230 in train.py and Lines 24, 247 in eval_utils.py
+
 config_path=cfgs/yc2_tsn_pdvc.yml
 python train.py --cfg_path ${config_path} --gpu_id ${GPU_ID}
 # The script will evaluate the model for every epoch. The results and logs are saved in `./save`.
@@ -117,20 +119,19 @@ python densevid_eval3/evaluate2018.py -v -s ${eval_json} -r data/yc2/captiondata
 ```
 2. Tuner Model Training Pipeline
 ```
+#Extract Caption Features Using CLIP
+
+jupyter run Interacting_with_CLIP.ipynb
+# Specify Path to Caption Data in ipynb 
+# Current Tuner architectures only support CLIP ViT_L_14@336px features
+
+#Training the Tuner
+
+jupyter run IDL_Project_Tuner_Training.ipynb
+# Specify model to train by using model = ....
+# After training, save pth file into model name {model}_imp
 
 ```
-
-<!-- 2. PDVC with ground-truth proposals
-
-```
-# Training
-config_path=cfgs/anet_c3d_pdvc_gt.yml
-python train.py --cfg_path ${config_path} --gpu_id ${GPU_ID}
-
-# Evaluation
-eval_folder=anet_c3d_pdvc_gt
-python eval.py --eval_folder ${eval_folder} --eval_transformer_input_type gt_proposals --gpu_id ${GPU_ID}
-``` -->
 
 ## Performance
 ### Dense video captioning (with learnt proposals)
