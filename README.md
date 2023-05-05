@@ -144,13 +144,13 @@ python eval.py --eval_folder ${eval_folder} --eval_transformer_input_type gt_pro
 ## Performance
 ### Dense video captioning (with learnt proposals)
 
-|  Model | Features | config_path |   Url   | Recall | Precision |    BLEU4   | METEOR2018 | METEOR2021 |  CIDEr | SODA_c |
+|  Model | Features | config_path |   Url   |   BLEU4   | METEOR |  CIDEr | SODA_c |
 |  ----  |  ----    |   ----  |  ----  |  ----   |  ----  |   ----  |  ----  |  ----  |  ----  | ---- |
-| PDVC_light   | TSN  | cfgs/anet_c3d_pdvcl.yml | [Google Drive](https://drive.google.com/drive/folders/1JKOJrm5QMAkso-VJnzGnksIVqNYt8BSI?usp=sharing)  |  55.30   |  58.42  | 1.55  |  7.13  |  7.66 | 24.80  |  5.23  |
-| PDVC   | TSN  | cfgs/anet_c3d_pdvc.yml |  [Google Drive](https://drive.google.com/drive/folders/1I77miVvThdMenmprgozfRsXDVoc-9TxY?usp=sharing)  |  55.20   |  57.36  | 1.82  |  7.48  |  8.09  | 28.16  |  5.47  |
-| PDVC_light   | TSN | cfgs/anet_tsn_pdvcl.yml | [Google Drive](https://drive.google.com/drive/folders/1hImJ7sXABzS-ycErruLFCE_pkWEHzFSV?usp=sharing)  |  55.34   |  57.97  | 1.66  |  7.41  |  7.97 | 27.23  |  5.51  |
-| PDVC   | TSN  | cfgs/anet_tsn_pdvc.yml | [Google Drive](https://drive.google.com/drive/folders/1v2Xj0Qjt3Te_SgVyySKEofRaZsSw_rjs?usp=sharing)  |  56.21   |  57.46  | 1.92  |  8.00  |  8.63 | 29.00  |  5.68  |
-| PDVC_light   | TSN | cfgs/anet_tsp_pdvcl.yml | [Google Drive](https://drive.google.com/drive/folders/1Ei8lnBs9Nn2SsFVd7WGe2iJERo46izv8?usp=sharing)  |  55.24   |  57.78  | 1.77  |  7.94  |  8.55 | 28.25  |  5.95  |
+| PDVC_baseline   | TSN  | cfgs/yc2_tsn_pdvc.yml | [model]()  |  0.76 ± 0.05   |  4.39 ± 0.07  | 20.68 ± 0.21  |  4.47 ± 0.87  |
+| Linear   | TSN  | cfgs/yc2_tsn_pdvc.yml |  [model]()  |  0.87 ± 0.06   |  4.74 ± 0.09  | 21.76 ± 0.04  |  4.45 ± 1.13  |
+| Conv1   | TSN | cfgs/yc2_tsn_pdvc.yml | [model]()  |  0.90 ± 0.02   |  4.53 ± 0.07  | 22.32 ± 0.05  |  4.50 ± 1.48 |
+| Conv1 w/ Linear   | TSN  | cfgs/yc2_tsn_pdvc.yml | [model]()  |  0.77 ± 0.15   |  4.48 ± 0.02  | 21.07 ± 0.92  |  4.47 ± 1.49  |
+| Conv2   | TSN | cfgs/yc2_tsn_pdvc.yml | [model]()  |  0.40 ± 0.08   |  3.35 ± 0.01  | 14.34 ± 0.02  |  3.53 ± 0.71  |
 
 
 Notes:
@@ -163,7 +163,7 @@ The implementation of Deformable Transformer is mainly based on [Deformable DETR
 The implementation of the captioning head is based on [ImageCaptioning.pytorch](https://github.com/ruotianluo/ImageCaptioning.pytorch).
 We thanks the authors for their efforts.
 
-The base framework for PDVC is based on [PDVC](https://github.com/ttengwang/PDVC.git). We encourage you to take a look at their repo.
+The base framework for PDVC is located [here](https://github.com/ttengwang/PDVC.git). We encourage you to take a look at their repo.
 
 ```
 @inproceedings{wang2021end,
