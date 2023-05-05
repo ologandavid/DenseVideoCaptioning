@@ -168,9 +168,14 @@ Notes:
 Notes:
 * Paragraph-level scores are evaluated on the ActivityNet Entity ae-val set.
 
+## Acknowledgement
 
-## Citation
-If you find this repo helpful, please consider citing:
+The implementation of Deformable Transformer is mainly based on [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR). 
+The implementation of the captioning head is based on [ImageCaptioning.pytorch](https://github.com/ruotianluo/ImageCaptioning.pytorch).
+We thanks the authors for their efforts.
+
+The base framework for PDVC is based on [PDVC](https://github.com/ttengwang/PDVC.git). We encourage you to take a look at their repo.
+
 ```
 @inproceedings{wang2021end,
   title={End-to-End Dense Video Captioning with Parallel Decoding},
@@ -180,20 +185,4 @@ If you find this repo helpful, please consider citing:
   year={2021}
 }
 ```
-```
-@ARTICLE{wang2021echr,
-  author={Wang, Teng and Zheng, Huicheng and Yu, Mingjing and Tian, Qian and Hu, Haifeng},
-  journal={IEEE Transactions on Circuits and Systems for Video Technology}, 
-  title={Event-Centric Hierarchical Representation for Dense Video Captioning}, 
-  year={2021},
-  volume={31},
-  number={5},
-  pages={1890-1900},
-  doi={10.1109/TCSVT.2020.3014606}}
-```
 
-## Acknowledgement
-
-The implementation of Deformable Transformer is mainly based on [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR). 
-The implementation of the captioning head is based on [ImageCaptioning.pytorch](https://github.com/ruotianluo/ImageCaptioning.pytorch).
-We thanks the authors for their efforts.
