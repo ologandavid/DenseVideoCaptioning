@@ -38,7 +38,7 @@ Official implementation for End-to-End Dense Video Captioning with Parallel Deco
 PDVC is a simple yet effective framework for end-to-end dense video captioning with parallel decoding (PDVC), by formulating the dense caption generation as a set prediction task. Without bells and whistles, extensive experiments on ActivityNet Captions and YouCook2 show that PDVC is capable of producing high-quality captioning results, surpassing the state-of-the-art methods when its localization accuracy is on par with them.
 ![pdvc.jpg](pdvc.jpg)
 
-## Preparation
+## Installation
 Environment: Linux,  GCC>=5.4, CUDA >= 9.2, Python>=3.7, PyTorch>=1.5.1
 
 1. Clone the repo
@@ -53,6 +53,10 @@ source activate PDVC
 conda install pytorch==1.7.1 torchvision==0.8.2 cudatoolkit=10.1 -c pytorch
 conda install ffmpeg
 pip install -r requirement.txt
+sudo apt-get install build-essential
+sudo apt-get install ubuntu-drivers-common
+sudo apt-get ubuntu-drivers autoinstall
+sudo apt install nvidia-cuda-toolkit
 ```
 
 3. Compile the deformable attention layer (requires GCC >= 5.4). 
