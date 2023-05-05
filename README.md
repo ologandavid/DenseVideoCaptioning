@@ -1,7 +1,7 @@
 # Modified PDVC with Semantic Alignment
 
-Modified Implemetation for End-to-End Dense Video Captioning with Parallel Decoding and Semantic Alignment
-[[paper]](https://arxiv.org/abs/2108.07781)
+Modified Implementation for End-to-End Dense Video Captioning with Parallel Decoding and Semantic Alignment
+[[paper]](https://github.com/ologandavid/DenseVideoCaptioning/Documents/FinalReport.pdf)
 
 Original Implementation for End-to-End Dense Video Captioning with Parallel Decoding (ICCV 2021) 
 [[paper]](https://arxiv.org/abs/2108.07781)
